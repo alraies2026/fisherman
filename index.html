@@ -2,15 +2,20 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#0b1120">
-  <title> رأس البسيط</title>
-  <link rel="manifest" href="manifest.json">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="رأس البسيط">
+  <meta name="description" content="حالة البحر والرياح في رأس البسيط - مؤشر الصيد المثالي">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='100' fill='%230b1120'/%3E%3Ctext x='256' y='340' font-size='280' text-anchor='middle' fill='%2338bdf8'%3E🌊%3C/text%3E%3C/svg%3E">
+  <title>🌊 رأس البسيط - حالة البحر</title>
+  <link rel="manifest" href="data:application/manifest+json,{%22name%22:%22%D8%B1%D8%A3%D8%B3%20%D8%A7%D9%84%D8%A8%D8%B3%D9%8A%D8%B7%20-%20%D8%AD%D8%A7%D9%84%D8%A9%20%D8%A7%D9%84%D8%A8%D8%AD%D8%B1%22,%22short_name%22:%22%D8%B1%D8%A3%D8%B3%20%D8%A7%D9%84%D8%A8%D8%B3%D9%8A%D8%B7%22,%22description%22:%22%D8%AD%D8%A7%D9%84%D8%A9%20%D8%A7%D9%84%D8%A8%D8%AD%D8%B1%20%D9%88%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%AD%20%D9%88%D9%85%D8%A4%D8%B4%D8%B1%20%D8%A7%D9%84%D8%B5%D9%8A%D8%AF%20%D9%81%D9%8A%20%D8%B1%D8%A3%D8%B3%20%D8%A7%D9%84%D8%A8%D8%B3%D9%8A%D8%B7%22,%22start_url%22:%22/%22,%22display%22:%22standalone%22,%22theme_color%22:%22%230b1120%22,%22background_color%22:%22%230b1120%22,%22orientation%22:%22portrait%22,%22lang%22:%22ar%22,%22dir%22:%22rtl%22,%22icons%22:[{%22src%22:%22data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='100' fill='%230b1120'/%3E%3Ctext x='256' y='340' font-size='280' text-anchor='middle' fill='%2338bdf8'%3E🌊%3C/text%3E%3C/svg%3E%22,%22sizes%22:%22512x512%22,%22type%22:%22image/svg+xml%22,%22purpose%22:%22any%20maskable%22%22}]}">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: system-ui, -apple-system, sans-serif; background: #0b1120; color: #e2e8f0; padding: 16px; min-height: 100vh; }
     .container { max-width: 400px; margin: 0 auto; }
-    h1 { text-align: center; color: #38bdf8; margin-bottom: 20px; font-size: 1.5rem; }
+    h1 { text-align: center; color: #38bdf8; margin-bottom: 20px; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; gap: 8px; }
     .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
     .card { background: #1e293b; padding: 16px; border-radius: 12px; text-align: center; border: 1px solid #334155; }
     .icon { font-size: 2rem; margin-bottom: 8px; }
@@ -19,26 +24,26 @@
     .fish-box { background: #1e293b; padding: 20px; border-radius: 12px; text-align: center; margin-bottom: 16px; border: 1px solid #334155; }
     .bar { height: 8px; background: #334155; border-radius: 4px; margin: 12px 0; overflow: hidden; }
     .fill { height: 100%; background: #22c55e; border-radius: 4px; transition: width 0.5s; }
-    .tips-box { background: #1e3a8a; padding: 16px; border-radius: 12px; margin-bottom: 16px; border: 1px solid #3b82f6; grid-column: span 2; }
-    .tips-title { color: #93c5fd; font-size: 0.85rem; margin-bottom: 8px; font-weight: bold; }
-    .tips-text { font-size: 0.9rem; line-height: 1.6; color: #e0f2fe; }
     .note { background: #1e293b; padding: 12px; border-radius: 8px; font-size: 0.8rem; margin-bottom: 16px; border: 1px dashed #475569; }
-    button { width: 100%; padding: 14px; margin-bottom: 8px; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 1rem; }
+    button { width: 100%; padding: 14px; margin-bottom: 8px; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 1rem; transition: opacity 0.2s; }
+    button:active { opacity: 0.8; }
     .primary { background: #38bdf8; color: #0b1120; }
     .secondary { background: #334155; color: #e2e8f0; }
+    .install-btn { background: #10b981; color: #fff; display: none; }
     .status { text-align: center; font-size: 0.8rem; margin-top: 8px; padding: 8px; border-radius: 6px; }
     .error { color: #ef4444; background: rgba(239,68,68,0.1); }
     .success { color: #22c55e; background: rgba(34,197,94,0.1); }
     .debug { background: #0f172a; padding: 10px; border-radius: 6px; font-size: 0.7rem; margin-top: 12px; overflow-x: auto; direction: ltr; text-align: left; display: none; }
+    .offline-badge { position: fixed; bottom: 10px; right: 10px; background: #ef4444; color: white; padding: 4px 8px; border-radius: 20px; font-size: 0.7rem; display: none; }
   </style>
 </head>
 <body>
 <div class="container">
-  <h1>🌊 رأس البسيط</h1>
+  <h1>🌊 رأس البسيط <span id="onlineStatus">📶</span></h1>
   
   <div class="grid">
     <div class="card">
-      <div class="icon"></div>
+      <div class="icon">💨</div>
       <div class="label">الرياح</div>
       <div class="value" id="wind">--</div>
     </div>
@@ -47,7 +52,8 @@
       <div class="label">الاتجاه</div>
       <div class="value" id="dir">--</div>
     </div>
-    <div class="card">      <div class="icon">🌊</div>
+    <div class="card">
+      <div class="icon">🌊</div>
       <div class="label">الأمواج</div>
       <div class="value" id="wave">--</div>
     </div>
@@ -57,157 +63,246 @@
       <div class="value" id="press">--</div>
     </div>
   </div>
+  
   <div class="fish-box">
     <div class="label">مؤشر الصيد 🎣</div>
     <div class="value" id="fish" style="font-size: 2rem; margin: 8px 0;">--%</div>
     <div class="bar"><div class="fill" id="fill" style="width: 0%"></div></div>
     <div id="fishText">--</div>
   </div>
-  <div class="tips-box">
-    <div class="tips-title">🎯 نصائح لصياد الشاطئ</div>
-    <div class="tips-text" id="tips-text">انتظر التحميل...</div>
-  </div>
+  
   <div class="note">⚠️ بيانات حية من Open-Meteo</div>
   <button class="primary" onclick="fetchData()">🔄 تحديث الآن</button>
   <button class="secondary" onclick="requestNotif()">🔔 التنبيهات</button>
-  <button class="secondary" id="installBtn" style="display:none;">📲 تثبيت كتطبيق</button>
-  <div class="status" id="status">جاري البدء...</div>
+  <button class="install-btn" id="installBtn">📲 تثبيت التطبيق</button>
+  <div class="status" id="status">اضغط تحديث</div>
   <div class="debug" id="debug"></div>
 </div>
+<div class="offline-badge" id="offlineBadge">⚠️ وضع غير متصل</div>
 <script>
-  const LAT = 35.9333;
-  const LON = 35.9167;
-  const windDirs = ['شمال','شمال شرق','شرق','جنوب شرق','جنوب','جنوب غرب','غرب','شمال غرب'];
-  
-  async function fetchData() {
-    const status = document.getElementById('status');
-    status.innerHTML = ' جاري جلب البيانات...';
-    status.className = 'status';
+  (function() {
+    // ========== SERVICE WORKER (ملف وهمي مدمج) ==========
+    if ('serviceWorker' in navigator) {
+      // إنشاء Service Worker مباشرة من blob URL
+      const swCode = `
+        const CACHE_NAME = 'ras-al-bassit-v2';
+        const urlsToCache = ['/'];
+        
+        self.addEventListener('install', event => {
+          event.waitUntil(
+            caches.open(CACHE_NAME).then(cache => cache.addAll(urlsToCache)).then(() => self.skipWaiting())
+          );
+        });
+        
+        self.addEventListener('activate', event => {
+          event.waitUntil(
+            caches.keys().then(cacheNames => {
+              return Promise.all(
+                cacheNames.map(cacheName => {
+                  if (cacheName !== CACHE_NAME) return caches.delete(cacheName);
+                })
+              );
+            }).then(() => self.clients.claim())
+          );
+        });
+        
+        self.addEventListener('fetch', event => {
+          event.respondWith(
+            caches.match(event.request).then(response => {
+              if (response) return response;
+              return fetch(event.request).then(res => {
+                if (res && res.status === 200 && res.type === 'basic') {
+                  const resClone = res.clone();
+                  caches.open(CACHE_NAME).then(cache => cache.put(event.request, resClone));
+                }
+                return res;
+              }).catch(() => {
+                if (event.request.mode === 'navigate') return caches.match('/');
+                return null;
+              });
+            })
+          );
+        });
+      `;
+      const blob = new Blob([swCode], { type: 'application/javascript' });
+      const swUrl = URL.createObjectURL(blob);
+      navigator.serviceWorker.register(swUrl).then(reg => {
+        console.log('✅ Service Worker registered');
+        setTimeout(() => URL.revokeObjectURL(swUrl), 1000);
+      }).catch(err => console.error('SW error:', err));
+    }
     
-    try {
-      const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${LAT}&longitude=${LON}&current=wind_speed_10m,wind_direction_10m,surface_pressure&timezone=Asia/Damascus`;
-      const marineUrl = `https://marine-api.open-meteo.com/v1/marine?latitude=${LAT}&longitude=${LON}&current=wave_height&timezone=Asia/Damascus`;
-      
-      const [wRes, mRes] = await Promise.all([fetch(weatherUrl), fetch(marineUrl)]);
-      
-      if (!wRes.ok) throw new Error(`Weather API: ${wRes.status}`);
-            const w = await wRes.json();
-      const m = mRes.ok ? await mRes.json() : null;
-      
-      const wind = w.current.wind_speed_10m;
-      const wDir = w.current.wind_direction_10m;
-      const pressHpa = w.current.surface_pressure;
-      const pressMmhg = (pressHpa * 0.750062).toFixed(1);
-      const wave = m && m.current && m.current.wave_height ? m.current.wave_height : 0;
-      const dirName = windDirs[Math.round(wDir/45)%8];
-      
-      // عرض البيانات
-      updateUI(wind, dirName, wave, pressMmhg);
-      
-      // توليد النصائح (هنا السر!)
-      generateShoreTips(wind, wave, dirName, pressHpa);
-      
-      status.innerHTML = `✅ بيانات حقيقية - ${new Date().toLocaleTimeString('ar-SY')}`;
-      status.className = 'status success';
-      
-      // حفظ كل شيء في الكاش
-      saveData({wind, wDir, wave, pressMmhg, score: 0, time: new Date().toISOString()});
-      
-    } catch (err) {
-      console.error('Error:', err);
-      status.innerHTML = `⚠️ فشل الاتصال - عرض البيانات المحفوظة`;
-      status.className = 'status error';
-      
-      // إذا فشل الاتصال، نحاول استخدام البيانات القديمة لتوليد النصائح
-      const cached = localStorage.getItem('seaData');
-      if (cached) {
-        const d = JSON.parse(cached);
-        // إعادة حساب اسم الاتجاه من الزاوية المحفوظة
-        const savedDirName = windDirs[Math.round(d.wDir/45)%8] || 'غير محدد';
-        updateUI(d.wind, savedDirName, d.wave, d.pressMmhg);
-        generateShoreTips(d.wind, d.wave, savedDirName, 1013); // ضغط تقريبي
-        status.innerHTML += ' (من الذاكرة)';
+    // ========== البيانات والمتغيرات ==========
+    const LAT = 35.9333;
+    const LON = 35.9167;
+    const windDirs = ['شمال', 'شمال شرق', 'شرق', 'جنوب شرق', 'جنوب', 'جنوب غرب', 'غرب', 'شمال غرب'];
+    
+    // حالة الإنترنت
+    function updateOnlineStatus() {
+      const onlineSpan = document.getElementById('onlineStatus');
+      const offlineBadge = document.getElementById('offlineBadge');
+      if (navigator.onLine) {
+        onlineSpan.textContent = '📶';
+        onlineSpan.style.color = '#22c55e';
+        offlineBadge.style.display = 'none';
+      } else {
+        onlineSpan.textContent = '⚠️';
+        onlineSpan.style.color = '#ef4444';
+        offlineBadge.style.display = 'block';
       }
     }
-  }
-  function updateUI(wind, dir, wave, press) {
-    document.getElementById('wind').textContent = `${Math.round(wind)} كم/س`;
-    document.getElementById('dir').textContent = dir;
-    document.getElementById('wave').textContent = `${wave.toFixed(2)} م`;
-    document.getElementById('press').textContent = `${press} mmHg`;
     
-    // حساب سريع للمؤشر للعرض
-    let score = 0;
-    if (wind >= 5 && wind <= 15) score += 35; else if (wind < 25) score += 25; else score += 10;
-    if (wave < 0.5) score += 35; else if (wave < 1) score += 25; else score += 10;    score += 30; // ضغط ثابت تقريبي
+    window.addEventListener('online', updateOnlineStatus);
+    window.addEventListener('offline', updateOnlineStatus);
     
-    document.getElementById('fish').textContent = `${score}%`;
-    document.getElementById('fill').style.width = `${score}%`;
-    document.getElementById('fill').style.background = score > 70 ? '#22c55e' : '#f59e0b';
-    document.getElementById('fishText').textContent = score > 70 ? '🟢 ممتاز' : '🟡 مقبول';
-  }
-  function generateShoreTips(wind, wave, dir, pressure) {
-    let tips = [];
-    
-    if (dir === 'جنوب') tips.push("✅ رياح جنوبية: ممتازة للشاطئ، الأسماك قريبة.");
-    else if (dir.includes('غرب')) tips.push(" رياح غربية: ابحث عن مكان محمي من الموج.");
-    else if (dir === 'شمال') tips.push("🌬️ رياح شمالية: غالباً هادئة ومناسبة للصب.");
-    
-    if (wind < 10) tips.push("🎯 هدوء نسبي: استخدم خيوطاً خفيفة (0.20-0.25).");
-    else if (wind <= 20) tips.push("💨 سرعة متوسطة: استخدم أوزاناً (80-120 غرام).");
-    else tips.push("⚠️ رياح قوية: استخدم خيوطاً قوية وأوزان ثقيلة (150+).");
-    
-    if (wave < 0.5) tips.push("✅ ارتفاع مثالي: الأمواج تحرك الطعم وتجذب الأسماك.");
-    else if (wave >= 1.5) tips.push(" أمواج عالية: خطر للشاطئ، انتظر الهدوء.");
-    
-    if (pressure > 1015) tips.push("📈 ضغط مرتفع: الأسماك نشطة وتتغذى!");
-    
-    const hour = new Date().getHours();
-    if (hour >= 5 && hour <= 8) tips.push("🌅 وقت الذروة الصباحي: ركز على البوري والسرفس.");
-    else if (hour >= 17 && hour <= 20) tips.push("🌆 وقت الذروة المسائي: باركودة وقرموط نشطون.");
-    
-    document.getElementById('tips-text').textContent = tips.join(' ') || "ظروف اعتيادية.";
-  }
-  
-  function saveData(data) {
-    try { localStorage.setItem('seaData', JSON.stringify(data)); } catch(e){}
-  }
-  function requestNotif() {
-    if (!("Notification" in window)) return alert('المتصفح لا يدعم الإشعارات');
-    Notification.requestPermission().then(perm => alert(perm === 'granted' ? '✅ تم' : '❌ رفض'));
-  }
-  
-  // PWA Install Logic
-  let deferredPrompt = null;
-  window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault(); deferredPrompt = e;
-    document.getElementById('installBtn').style.display = 'block';
-  });
-  document.getElementById('installBtn').addEventListener('click', async () => {
-    if (!deferredPrompt) return;
-    deferredPrompt.prompt();
-    const { outcome } = await deferredPrompt.userChoice;    if (outcome === 'accepted') document.getElementById('installBtn').style.display = 'none';
-    deferredPrompt = null;
-  });
-  
-  // Service Worker
-  if ('serviceWorker' in navigator) {
-    const swCode = `self.addEventListener('install', e => self.skipWaiting()); self.addEventListener('activate', e => e.waitUntil(clients.claim())); self.addEventListener('fetch', e => e.respondWith(fetch(e.request).catch(() => caches.match(e.request))));`;
-    const blob = new Blob([swCode], { type: 'application/javascript' });
-    navigator.serviceWorker.register(URL.createObjectURL(blob)).catch(e => console.error(e));
-  }
-  
-  window.onload = () => {
-    const saved = localStorage.getItem('seaData');
-    if (saved) {
-      const d = JSON.parse(saved);
-      const dirName = windDirs[Math.round(d.wDir/45)%8] || '--';
-      updateUI(d.wind, dirName, d.wave, d.pressMmhg);
-      // توليد النصائح فوراً من البيانات المحفوظة عند الفتح
-      generateShoreTips(d.wind, d.wave, dirName, 1013); 
+    // جلب البيانات
+    async function fetchData() {
+      const status = document.getElementById('status');
+      const debug = document.getElementById('debug');
+      status.innerHTML = '⏳ جاري جلب البيانات...';
+      status.className = 'status';
+      debug.style.display = 'none';
+      
+      try {
+        const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${LAT}&longitude=${LON}&current=wind_speed_10m,wind_direction_10m,surface_pressure&timezone=Asia/Damascus`;
+        const marineUrl = `https://marine-api.open-meteo.com/v1/marine?latitude=${LAT}&longitude=${LON}&current=wave_height&timezone=Asia/Damascus`;
+        
+        const [wRes, mRes] = await Promise.all([fetch(weatherUrl), fetch(marineUrl)]);
+        
+        if (!wRes.ok) throw new Error(`Weather API: ${wRes.status}`);
+        
+        const w = await wRes.json();
+        const m = mRes.ok ? await mRes.json() : null;
+        
+        const wind = w.current.wind_speed_10m;
+        const wDir = w.current.wind_direction_10m;
+        const pressHpa = w.current.surface_pressure;
+        const pressMmhg = (pressHpa * 0.750062).toFixed(1);
+        const wave = m && m.current && m.current.wave_height ? m.current.wave_height : 0;
+        
+        debug.innerHTML = `
+          <strong>البيانات الخام:</strong><br>
+          الرياح: ${wind} كم/س<br>
+          الاتجاه: ${wDir}° (${windDirs[Math.round(wDir/45)%8]})<br>
+          الأمواج: ${wave} م<br>
+          الضغط: ${pressHpa} hPa (${pressMmhg} mmHg)<br>
+          التوقيت: ${w.current.time}
+        `;
+        debug.style.display = 'block';
+        
+        // حساب مؤشر الصيد
+        let score = 0;
+        if (wind >= 5 && wind <= 15) score += 35;
+        else if (wind < 25) score += 25;
+        else score += 10;
+        
+        if (wave < 0.5) score += 35;
+        else if (wave < 1) score += 25;
+        else score += 10;
+        
+        if (pressHpa > 1010 && pressHpa < 1018) score += 30;
+        else score += 15;
+        
+        document.getElementById('wind').textContent = `${Math.round(wind)} كم/س`;
+        document.getElementById('dir').textContent = windDirs[Math.round(wDir/45)%8];
+        document.getElementById('wave').textContent = `${wave.toFixed(2)} م`;
+        document.getElementById('press').textContent = `${pressMmhg} mmHg`;
+        document.getElementById('fish').textContent = `${score}%`;
+        document.getElementById('fill').style.width = `${score}%`;
+        document.getElementById('fill').style.background = score > 70 ? '#22c55e' : score > 40 ? '#f59e0b' : '#ef4444';
+        document.getElementById('fishText').textContent = score > 70 ? '🟢 ممتاز' : score > 40 ? '🟡 مقبول' : '🔴 ضعيف';
+        
+        status.innerHTML = `✅ تحديث ${new Date().toLocaleTimeString('ar-SY')}`;
+        status.className = 'status success';
+        
+        localStorage.setItem('seaData', JSON.stringify({
+          wind, wDir, wave, pressMmhg, score,
+          time: new Date().toISOString()
+        }));
+        
+      } catch (err) {
+        console.error('❌ Error:', err);
+        status.innerHTML = `❌ ${err.message}`;
+        status.className = 'status error';
+        debug.innerHTML = `<strong>خطأ:</strong> ${err.message}<br>⚠️ قد تكون غير متصل. يتم عرض بيانات مخزنة.`;
+        debug.style.display = 'block';
+        
+        const saved = localStorage.getItem('seaData');
+        if (saved) {
+          const d = JSON.parse(saved);
+          document.getElementById('wind').textContent = `${Math.round(d.wind)} كم/س`;
+          document.getElementById('dir').textContent = windDirs[Math.round(d.wDir/45)%8];
+          document.getElementById('wave').textContent = `${d.wave.toFixed(2)} م`;
+          document.getElementById('press').textContent = `${d.pressMmhg} mmHg`;
+          document.getElementById('fish').textContent = `${d.score}%`;
+          document.getElementById('fill').style.width = `${d.score}%`;
+        }
+      }
     }
-    fetchData(); // محاولة التحديث
-  };
+    
+    function requestNotif() {
+      if (!("Notification" in window)) {
+        alert('المتصفح لا يدعم الإشعارات');
+        return;
+      }
+      Notification.requestPermission().then(perm => {
+        if (perm === 'granted') {
+          alert('✅ تم تفعيل الإشعارات');
+          new Notification('🌊 رأس البسيط', {
+            body: 'يمكنك تفعيل التنبيهات لحالة البحر',
+            icon: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"%3E%3Crect width="512" height="512" rx="100" fill="%230b1120"/%3E%3Ctext x="256" y="340" font-size="280" text-anchor="middle" fill="%2338bdf8"%3E🌊%3C/text%3E%3C/svg%3E'
+          });
+        } else {
+          alert('❌ تم رفض الإشعارات');
+        }
+      });
+    }
+    
+    // ========== تثبيت PWA ==========
+    let deferredPrompt = null;
+    
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      const installBtn = document.getElementById('installBtn');
+      installBtn.style.display = 'block';
+      installBtn.classList.add('install-btn');
+    });
+    
+    window.addEventListener('appinstalled', () => {
+      document.getElementById('installBtn').style.display = 'none';
+      deferredPrompt = null;
+      console.log('✅ تم تثبيت التطبيق');
+    });
+    
+    document.getElementById('installBtn').addEventListener('click', async () => {
+      if (!deferredPrompt) return;
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      if (outcome === 'accepted') {
+        document.getElementById('installBtn').style.display = 'none';
+      }
+      deferredPrompt = null;
+    });
+    
+    // ========== التشغيل عند التحميل ==========
+    window.onload = () => {
+      updateOnlineStatus();
+      const saved = localStorage.getItem('seaData');
+      if (saved) {
+        const d = JSON.parse(saved);
+        document.getElementById('wind').textContent = `${Math.round(d.wind)} كم/س`;
+        document.getElementById('dir').textContent = windDirs[Math.round(d.wDir/45)%8];
+        document.getElementById('wave').textContent = `${d.wave.toFixed(2)} م`;
+        document.getElementById('press').textContent = `${d.pressMmhg} mmHg`;
+        document.getElementById('fish').textContent = `${d.score}%`;
+        document.getElementById('fill').style.width = `${d.score}%`;
+        document.getElementById('fill').style.background = d.score > 70 ? '#22c55e' : d.score > 40 ? '#f59e0b' : '#ef4444';
+      }
+      fetchData();
+      setInterval(fetchData, 30 * 60 * 1000);
+    };
+  })();
 </script>
 </body>
-</html>
+</html>؟ 
