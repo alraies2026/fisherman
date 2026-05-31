@@ -4,229 +4,105 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#0b1120">
+  
+  <!-- دعم iOS -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="رأس البسيط">
-  <meta name="description" content="حالة البحر والرياح في رأس البسيط - مؤشر الصيد المثالي">
   
-  <!-- أيقونات Apple Touch -->
-  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='100' fill='%230b1120'/%3E%3Ctext x='256' y='340' font-size='280' text-anchor='middle' fill='%2338bdf8'%3E🌊%3C/text%3E%3C/svg%3E">
+  <!-- أيقونة -->
+  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='100' fill='%230b1120'/><text x='256' y='340' font-size='280' text-anchor='middle' fill='%2338bdf8'>🌊</text></svg>">
   
   <title>🌊 رأس البسيط - حالة البحر</title>
-  
-  <!-- Manifest مدمج مع أيقونات متعددة -->
-  <link rel="manifest" href="data:application/manifest+json,{
-    "name":"رأس البسيط - حالة البحر",
-    "short_name":"رأس البسيط",
-    "description":"حالة البحر والرياح ومؤشر الصيد في رأس البسيط",
-    "start_url":"/",
-    "display":"standalone",
-    "theme_color":"#0b1120",
-    "background_color":"#0b1120",
-    "orientation":"portrait",
-    "lang":"ar",
-    "dir":"rtl",
-    "icons":[
-      {"src":"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='40' fill='%230b1120'/%3E%3Ctext x='96' y='130' font-size='100' text-anchor='middle' fill='%2338bdf8'%3E🌊%3C/text%3E%3C/svg%3E","sizes":"192x192","type":"image/svg+xml","purpose":"any maskable"},
-      {"src":"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='100' fill='%230b1120'/%3E%3Ctext x='256' y='340' font-size='280' text-anchor='middle' fill='%2338bdf8'%3E🌊%3C/text%3E%3C/svg%3E","sizes":"512x512","type":"image/svg+xml","purpose":"any maskable"}
-    ]
-  }">
   
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { 
-      font-family: system-ui, -apple-system, 'Segoe UI', Tahoma, sans-serif; 
+      font-family: system-ui, -apple-system, sans-serif; 
       background: #0b1120; 
       color: #e2e8f0; 
       padding: 16px; 
       min-height: 100vh;
-      padding-bottom: 80px;
+      padding-bottom: 90px;
     }
     .container { max-width: 400px; margin: 0 auto; }
     h1 { 
-      text-align: center; 
-      color: #38bdf8; 
-      margin-bottom: 20px; 
-      font-size: 1.5rem;       display: flex; 
-      align-items: center; 
-      justify-content: center; 
-      gap: 8px; 
+      text-align: center; color: #38bdf8; margin: 20px 0; 
+      font-size: 1.5rem; display: flex; align-items: center; justify-content: center; gap: 8px; 
     }
     .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
     .card { 
-      background: #1e293b; 
-      padding: 16px; 
-      border-radius: 12px; 
-      text-align: center; 
-      border: 1px solid #334155;
-      transition: transform 0.2s;
+      background: #1e293b; padding: 16px; border-radius: 12px; text-align: center; 
+      border: 1px solid #334155; 
     }
-    .card:active { transform: scale(0.98); }
     .icon { font-size: 2rem; margin-bottom: 8px; }
     .label { font-size: 0.8rem; color: #94a3b8; margin-bottom: 4px; }
     .value { font-size: 1.2rem; font-weight: bold; color: #fff; }
     .fish-box { 
-      background: #1e293b; 
-      padding: 20px; 
-      border-radius: 12px; 
-      text-align: center; 
-      margin-bottom: 16px; 
-      border: 1px solid #334155; 
+      background: #1e293b; padding: 20px; border-radius: 12px; text-align: center; 
+      margin-bottom: 16px; border: 1px solid #334155; 
     }
     .bar { height: 8px; background: #334155; border-radius: 4px; margin: 12px 0; overflow: hidden; }
-    .fill { height: 100%; background: #22c55e; border-radius: 4px; transition: width 0.5s ease; }
+    .fill { height: 100%; background: #22c55e; border-radius: 4px; transition: width 0.5s; }
     .note { 
-      background: #1e293b; 
-      padding: 12px; 
-      border-radius: 8px; 
-      font-size: 0.8rem; 
-      margin-bottom: 16px; 
-      border: 1px dashed #475569; 
+      background: #1e293b; padding: 12px; border-radius: 8px; font-size: 0.8rem; 
+      margin-bottom: 16px; border: 1px dashed #475569; 
+    }    button { 
+      width: 100%; padding: 14px; margin: 8px 0; border: none; border-radius: 10px; 
+      font-weight: bold; cursor: pointer; font-size: 1rem; 
+      display: flex; align-items: center; justify-content: center; gap: 8px;
     }
-    button { 
-      width: 100%; 
-      padding: 14px; 
-      margin-bottom: 8px; 
-      border: none; 
-      border-radius: 10px; 
-      font-weight: bold; 
-      cursor: pointer; 
-      font-size: 1rem; 
-      transition: all 0.2s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;    }
-    button:active { transform: scale(0.98); }
-    .primary { background: linear-gradient(135deg, #38bdf8, #0ea5e9); color: #0b1120; }
+    .primary { background: #38bdf8; color: #0b1120; }
     .secondary { background: #334155; color: #e2e8f0; }
     .install-btn { 
       background: linear-gradient(135deg, #10b981, #059669); 
-      color: #fff; 
-      display: none;
+      color: white; 
       animation: pulse 2s infinite;
     }
     @keyframes pulse {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
-      50% { box-shadow: 0 0 0 12px rgba(16, 185, 129, 0); }
+      0%, 100% { box-shadow: 0 0 0 0 rgba(16,185,129,0.4); }
+      50% { box-shadow: 0 0 0 10px rgba(16,185,129,0); }
     }
-    .status { 
-      text-align: center; 
-      font-size: 0.8rem; 
-      margin-top: 8px; 
-      padding: 8px; 
-      border-radius: 6px; 
-    }
+    .status { text-align: center; font-size: 0.8rem; padding: 8px; border-radius: 6px; margin-top: 8px; }
     .error { color: #ef4444; background: rgba(239,68,68,0.1); }
     .success { color: #22c55e; background: rgba(34,197,94,0.1); }
-    .debug { 
-      background: #0f172a; 
-      padding: 10px; 
-      border-radius: 6px; 
-      font-size: 0.7rem; 
-      margin-top: 12px; 
-      overflow-x: auto; 
-      direction: ltr; 
-      text-align: left; 
-      display: none; 
-    }
-    .offline-badge { 
-      position: fixed; 
-      bottom: 10px; 
-      right: 10px; 
-      background: #ef4444; 
-      color: white; 
-      padding: 4px 8px; 
-      border-radius: 20px; 
-      font-size: 0.7rem; 
-      display: none; 
-      z-index: 100;
-    }
-    
-    /* نافذة تعليمات التثبيت لـ iOS */
-    .ios-install-modal {
-      display: none;      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0,0,0,0.8);
-      z-index: 1000;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-    .ios-install-modal.active { display: flex; }
-    .ios-modal-content {
-      background: #1e293b;
-      border-radius: 16px;
-      padding: 24px;
-      max-width: 320px;
-      text-align: center;
-      border: 1px solid #334155;
-    }
-    .ios-modal-content h3 { color: #38bdf8; margin-bottom: 12px; }
-    .ios-modal-content p { font-size: 0.9rem; color: #94a3b8; margin-bottom: 16px; line-height: 1.5; }
-    .ios-steps {
-      text-align: right;
-      font-size: 0.85rem;
-      color: #e2e8f0;
-      margin-bottom: 16px;
-    }
-    .ios-steps div { margin: 8px 0; display: flex; align-items: center; gap: 8px; }
-    .ios-steps .step-num {
-      background: #38bdf8;
-      color: #0b1120;
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      font-size: 0.8rem;
-      flex-shrink: 0;
-    }
-    .ios-modal-content button {
-      background: #334155;
-      color: #e2e8f0;
-    }
     
     /* شريط التثبيت السفلي */
-    .install-banner {
-      position: fixed;      bottom: 0;
-      left: 0;
-      right: 0;
-      background: #1e293b;
-      border-top: 1px solid #334155;
-      padding: 12px 16px;
-      display: none;
-      align-items: center;
-      gap: 12px;
-      z-index: 99;
-      animation: slideUp 0.3s ease;
+    .install-bar {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: #1e293b; border-top: 1px solid #334155;
+      padding: 12px 16px; display: none; align-items: center; gap: 12px;
+      z-index: 100; animation: slideUp 0.3s ease;
     }
-    .install-banner.active { display: flex; }
-    @keyframes slideUp {
-      from { transform: translateY(100%); }
-      to { transform: translateY(0); }
+    .install-bar.show { display: flex; }
+    @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+    .install-bar .icon { font-size: 1.5rem; }
+    .install-bar .text { flex: 1; text-align: right; }
+    .install-bar .text h4 { font-size: 0.95rem; margin-bottom: 2px; }
+    .install-bar .text p { font-size: 0.75rem; color: #94a3b8; }
+    .install-bar button { width: auto; padding: 8px 16px; margin: 0; font-size: 0.9rem; border-radius: 8px; }
+    .install-bar .close { background: transparent; color: #94a3b8; padding: 4px 8px; font-size: 1.2rem; }
+    
+    /* نافذة تعليمات آيفون */
+    .modal {
+      display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.8); z-index: 200; align-items: center; justify-content: center; padding: 20px;
     }
-    .install-banner .banner-icon { font-size: 1.5rem; }
-    .install-banner .banner-text { flex: 1; text-align: right; }
-    .install-banner .banner-text h4 { font-size: 0.95rem; margin-bottom: 2px; }
-    .install-banner .banner-text p { font-size: 0.75rem; color: #94a3b8; }
-    .install-banner button {
-      width: auto;
-      padding: 8px 16px;
-      margin: 0;
-      font-size: 0.9rem;
-      border-radius: 8px;
+    .modal.show { display: flex; }
+    .modal-content {
+      background: #1e293b; border-radius: 16px; padding: 24px; max-width: 320px;
+      text-align: center; border: 1px solid #334155;
     }
-    .install-banner .close-btn {
-      background: transparent;
-      color: #94a3b8;
-      padding: 4px 8px;
-      font-size: 1.2rem;
+    .modal-content h3 { color: #38bdf8; margin-bottom: 12px; }
+    .modal-content p { font-size: 0.9rem; color: #94a3b8; margin-bottom: 16px; line-height: 1.5; }
+    .steps { text-align: right; font-size: 0.85rem; color: #e2e8f0; margin-bottom: 16px; }
+    .steps div { margin: 8px 0; display: flex; align-items: center; gap: 8px; }    .steps .n {
+      background: #38bdf8; color: #0b1120; width: 24px; height: 24px; border-radius: 50%;
+      display: inline-flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.8rem; flex-shrink: 0;
+    }
+    .offline { 
+      position: fixed; bottom: 10px; right: 10px; background: #ef4444; color: white; 
+      padding: 4px 8px; border-radius: 20px; font-size: 0.7rem; display: none; z-index: 50;
     }
   </style>
 </head>
@@ -235,347 +111,240 @@
   <h1>🌊 رأس البسيط <span id="onlineStatus">📶</span></h1>
   
   <div class="grid">
-    <div class="card">
-      <div class="icon">💨</div>
-      <div class="label">الرياح</div>
-      <div class="value" id="wind">--</div>
-    </div>
-    <div class="card">
-      <div class="icon">🧭</div>
-      <div class="label">الاتجاه</div>
-      <div class="value" id="dir">--</div>    </div>
-    <div class="card">
-      <div class="icon">🌊</div>
-      <div class="label">الأمواج</div>
-      <div class="value" id="wave">--</div>
-    </div>
-    <div class="card">
-      <div class="icon">🌡️</div>
-      <div class="label">الضغط</div>
-      <div class="value" id="press">--</div>
-    </div>
+    <div class="card"><div class="icon">💨</div><div class="label">الرياح</div><div class="value" id="wind">--</div></div>
+    <div class="card"><div class="icon">🧭</div><div class="label">الاتجاه</div><div class="value" id="dir">--</div></div>
+    <div class="card"><div class="icon">🌊</div><div class="label">الأمواج</div><div class="value" id="wave">--</div></div>
+    <div class="card"><div class="icon">🌡️</div><div class="label">الضغط</div><div class="value" id="press">--</div></div>
   </div>
   
   <div class="fish-box">
     <div class="label">مؤشر الصيد 🎣</div>
-    <div class="value" id="fish" style="font-size: 2rem; margin: 8px 0;">--%</div>
-    <div class="bar"><div class="fill" id="fill" style="width: 0%"></div></div>
+    <div class="value" id="fish" style="font-size:2rem;margin:8px 0">--%</div>
+    <div class="bar"><div class="fill" id="fill" style="width:0"></div></div>
     <div id="fishText">--</div>
   </div>
   
-  <div class="note">⚠️ بيانات حية من Open-Meteo</div>
-  
-  <button class="primary" onclick="fetchData()">🔄 تحديث الآن</button>
-  <button class="secondary" onclick="requestNotif()">🔔 التنبيهات</button>
-  <button class="install-btn" id="installBtn">📲 تثبيت التطبيق</button>
-  
+  <div class="note">⚠️ بيانات من Open-Meteo</div>
+  <button class="primary" onclick="fetchData()">🔄 تحديث</button>
+  <button class="secondary" onclick="requestNotif()">🔔 تنبيهات</button>
+  <button class="install-btn" id="installBtn" style="display:none">📲 تثبيت التطبيق</button>
   <div class="status" id="status">اضغط تحديث</div>
-  <div class="debug" id="debug"></div>
 </div>
 
-<div class="offline-badge" id="offlineBadge">⚠️ وضع غير متصل</div>
+<div class="offline" id="offlineBadge">⚠️ غير متصل</div>
 
-<!-- نافذة تعليمات التثبيت لـ iOS -->
-<div class="ios-install-modal" id="iosModal">
-  <div class="ios-modal-content">
-    <h3>📲 تثبيت التطبيق</h3>
-    <p>لتثبيت التطبيق على جهاز آيفون أو آيباد:</p>
-    <div class="ios-steps">
-      <div><span class="step-num">1</span> اضغط على زر المشاركة 📤</div>
-      <div><span class="step-num">2</span> اختر "إضافة إلى الشاشة الرئيسية"</div>
-      <div><span class="step-num">3</span> اضغط "إضافة" لتثبيت التطبيق</div>
+<!-- شريط التثبيت -->
+<div class="install-bar" id="installBar">
+  <div class="icon">📲</div>
+  <div class="text"><h4>ثبّت التطبيق</h4><p>وصول أسرع بدون متصفح</p></div>
+  <button class="primary" id="barInstall">تثبيت</button>
+  <button class="close" onclick="hideBar()">✕</button>
+</div>
+
+<!-- تعليمات آيفون -->
+<div class="modal" id="iosModal">
+  <div class="modal-content">
+    <h3>📲 التثبيت على آيفون</h3>
+    <p>كروم على iOS لا يدعم التثبيت التلقائي، لكن يمكنك:</p>    <div class="steps">
+      <div><span class="n">1</span> اضغط على زر المشاركة 📤 في الأسفل</div>
+      <div><span class="n">2</span> اختر "إضافة إلى الشاشة الرئيسية"</div>
+      <div><span class="n">3</span> سمِّ التطبيق واضغط "إضافة"</div>
     </div>
-    <button onclick="closeIOSModal()">✓ فهمت، شكرًا</button>
+    <button class="secondary" onclick="closeModal()">✓ فهمت</button>
   </div>
-</div>
-
-<!-- شريط التثبيت السفلي -->
-<div class="install-banner" id="installBanner">
-  <div class="banner-icon">📲</div>
-  <div class="banner-text">    <h4>ثبّت تطبيق رأس البسيط</h4>
-    <p>وصول أسرع دون فتح المتصفح</p>
-  </div>
-  <button class="primary" id="bannerInstallBtn">تثبيت</button>
-  <button class="close-btn" onclick="hideInstallBanner()">✕</button>
 </div>
 
 <script>
-(function() {
-  // ========== SERVICE WORKER ==========
-  if ('serviceWorker' in navigator) {
-    const swCode = `
-      const CACHE_NAME = 'ras-al-bassit-v3';
-      const urlsToCache = ['/'];
-      
-      self.addEventListener('install', event => {
-        event.waitUntil(
-          caches.open(CACHE_NAME)
-            .then(cache => cache.addAll(urlsToCache))
-            .then(() => self.skipWaiting())
-        );
-      });
-      
-      self.addEventListener('activate', event => {
-        event.waitUntil(
-          caches.keys().then(cacheNames => {
-            return Promise.all(
-              cacheNames.map(cacheName => {
-                if (cacheName !== CACHE_NAME) return caches.delete(cacheName);
-              })
-            );
-          }).then(() => self.clients.claim())
-        );
-      });
-      
-      self.addEventListener('fetch', event => {
-        event.respondWith(
-          caches.match(event.request).then(response => {
-            if (response) return response;
-            return fetch(event.request).then(res => {
-              if (res && res.status === 200 && res.type === 'basic') {
-                const resClone = res.clone();
-                caches.open(CACHE_NAME).then(cache => cache.put(event.request, resClone));
-              }
-              return res;
-            }).catch(() => {
-              if (event.request.mode === 'navigate') return caches.match('/');
-              return new Response('أنت غير متصل حالياً', { 
-                headers: { 'Content-Type': 'text/html; charset=utf-8' } 
-              });            });
-          })
-        );
-      });
-    `;
-    const blob = new Blob([swCode], { type: 'application/javascript' });
-    const swUrl = URL.createObjectURL(blob);
-    
-    navigator.serviceWorker.register(swUrl)
-      .then(reg => {
-        console.log('✅ Service Worker registered');
-        setTimeout(() => URL.revokeObjectURL(swUrl), 1000);
-      })
-      .catch(err => console.error('SW error:', err));
-  }
+// ========== متغيرات ==========
+const LAT = 35.9333, LON = 35.9167;
+const windDirs = ['شمال','شمال شرق','شرق','جنوب شرق','جنوب','جنوب غرب','غرب','شمال غرب'];
+let deferredPrompt = null;
+const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
 
-  // ========== المتغيرات ==========
-  const LAT = 35.9333;
-  const LON = 35.9167;
-  const windDirs = ['شمال', 'شمال شرق', 'شرق', 'جنوب شرق', 'جنوب', 'جنوب غرب', 'غرب', 'شمال غرب'];
-  let deferredPrompt = null;
-  let isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+// ========== حالة الإنترنت ==========
+function updateOnline() {
+  const s = document.getElementById('onlineStatus'), b = document.getElementById('offlineBadge');
+  if (navigator.onLine) { s.textContent = '📶'; s.style.color = '#22c55e'; b.style.display = 'none'; }
+  else { s.textContent = '⚠️'; s.style.color = '#ef4444'; b.style.display = 'block'; }
+}
+window.addEventListener('online', updateOnline);
+window.addEventListener('offline', updateOnline);
 
-  // ========== حالة الإنترنت ==========
-  function updateOnlineStatus() {
-    const onlineSpan = document.getElementById('onlineStatus');
-    const offlineBadge = document.getElementById('offlineBadge');
-    if (navigator.onLine) {
-      onlineSpan.textContent = '📶';
-      onlineSpan.style.color = '#22c55e';
-      offlineBadge.style.display = 'none';
-    } else {
-      onlineSpan.textContent = '⚠️';
-      onlineSpan.style.color = '#ef4444';
-      offlineBadge.style.display = 'block';
-    }
-  }
-  window.addEventListener('online', updateOnlineStatus);
-  window.addEventListener('offline', updateOnlineStatus);
-
-  // ========== جلب البيانات ==========
-  async function fetchData() {
-    const status = document.getElementById('status');
-    const debug = document.getElementById('debug');
-    status.innerHTML = '⏳ جاري جلب البيانات...';
-    status.className = 'status';
-    debug.style.display = 'none';
-    
-    try {
-      const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${LAT}&longitude=${LON}&current=wind_speed_10m,wind_direction_10m,surface_pressure&timezone=Asia/Damascus`;      const marineUrl = `https://marine-api.open-meteo.com/v1/marine?latitude=${LAT}&longitude=${LON}&current=wave_height&timezone=Asia/Damascus`;
-      
-      const [wRes, mRes] = await Promise.all([fetch(weatherUrl), fetch(marineUrl)]);
-      if (!wRes.ok) throw new Error(`Weather API: ${wRes.status}`);
-      
-      const w = await wRes.json();
-      const m = mRes.ok ? await mRes.json() : null;
-      
-      const wind = w.current.wind_speed_10m;
-      const wDir = w.current.wind_direction_10m;
-      const pressHpa = w.current.surface_pressure;
-      const pressMmhg = (pressHpa * 0.750062).toFixed(1);
-      const wave = m && m.current && m.current.wave_height ? m.current.wave_height : 0;
-      
-      debug.innerHTML = `<strong>البيانات الخام:</strong><br>الرياح: ${wind} كم/س<br>الاتجاه: ${wDir}°<br>الأمواج: ${wave} م<br>الضغط: ${pressMmhg} mmHg<br>التوقيت: ${w.current.time}`;
-      debug.style.display = 'block';
-      
-      // حساب مؤشر الصيد
-      let score = 0;
-      if (wind >= 5 && wind <= 15) score += 35; else if (wind < 25) score += 25; else score += 10;
-      if (wave < 0.5) score += 35; else if (wave < 1) score += 25; else score += 10;
-      if (pressHpa > 1010 && pressHpa < 1018) score += 30; else score += 15;
-      
-      // تحديث الواجهة
-      document.getElementById('wind').textContent = `${Math.round(wind)} كم/س`;
-      document.getElementById('dir').textContent = windDirs[Math.round(wDir/45)%8];
-      document.getElementById('wave').textContent = `${wave.toFixed(2)} م`;
-      document.getElementById('press').textContent = `${pressMmhg} mmHg`;
-      document.getElementById('fish').textContent = `${score}%`;
-      document.getElementById('fill').style.width = `${score}%`;
-      document.getElementById('fill').style.background = score > 70 ? '#22c55e' : score > 40 ? '#f59e0b' : '#ef4444';
-      document.getElementById('fishText').textContent = score > 70 ? '🟢 ممتاز' : score > 40 ? '🟡 مقبول' : '🔴 ضعيف';
-      
-      status.innerHTML = `✅ تحديث ${new Date().toLocaleTimeString('ar-SY')}`;
-      status.className = 'status success';
-      
-      localStorage.setItem('seaData', JSON.stringify({ wind, wDir, wave, pressMmhg, score, time: new Date().toISOString() }));
-      
-    } catch (err) {
-      console.error('❌ Error:', err);
-      status.innerHTML = `❌ ${err.message}`;
-      status.className = 'status error';
-      debug.innerHTML = `<strong>خطأ:</strong> ${err.message}`;
-      debug.style.display = 'block';
-      
-      const saved = localStorage.getItem('seaData');
-      if (saved) {
-        const d = JSON.parse(saved);
-        document.getElementById('wind').textContent = `${Math.round(d.wind)} كم/س`;
-        document.getElementById('dir').textContent = windDirs[Math.round(d.wDir/45)%8];        document.getElementById('wave').textContent = `${d.wave.toFixed(2)} م`;
-        document.getElementById('press').textContent = `${d.pressMmhg} mmHg`;
-        document.getElementById('fish').textContent = `${d.score}%`;
-        document.getElementById('fill').style.width = `${d.score}%`;
-      }
-    }
-  }
-
-  // ========== الإشعارات ==========
-  function requestNotif() {
-    if (!("Notification" in window)) { alert('المتصفح لا يدعم الإشعارات'); return; }
-    Notification.requestPermission().then(perm => {
-      if (perm === 'granted') {
-        alert('✅ تم تفعيل الإشعارات');
-        new Notification('🌊 رأس البسيط', {
-          body: 'يمكنك تفعيل التنبيهات لحالة البحر',
-          icon: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"%3E%3Crect width="512" height="512" rx="100" fill="%230b1120"/%3E%3Ctext x="256" y="340" font-size="280" text-anchor="middle" fill="%2338bdf8"%3E🌊%3C/text%3E%3C/svg%3E'
-        });
-      } else { alert('❌ تم رفض الإشعارات'); }
+// ========== Service Worker ==========
+if ('serviceWorker' in navigator) {
+  const sw = `
+    const CACHE = 'ras-v1';
+    self.addEventListener('install', e => {
+      e.waitUntil(caches.open(CACHE).then(c => c.add('/')).then(() => self.skipWaiting()));
     });
-  }
+    self.addEventListener('activate', e => {
+      e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim()));
+    });
+    self.addEventListener('fetch', e => {
+      e.respondWith(caches.match(e.request).then(r => r || fetch(e.request).catch(() => caches.match('/'))));
+    });
+  `;
+  const blob = new Blob([sw], {type: 'application/javascript'});
+  const url = URL.createObjectURL(blob);
+  navigator.serviceWorker.register(url).then(() => {
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+    console.log('✅ SW registered');
+  }).catch(e => console.error('SW error:', e));
+}
 
-  // ========== تثبيت PWA ==========
-  function showInstallBanner() {
-    const banner = document.getElementById('installBanner');
-    if (banner && !banner.classList.contains('active')) {
-      banner.classList.add('active');
-    }
-  }
+// ========== جلب البيانات ==========
+async function fetchData() {
+  const status = document.getElementById('status');  status.innerHTML = '⏳ جاري التحميل...';
+  status.className = 'status';
   
-  function hideInstallBanner() {
-    document.getElementById('installBanner').classList.remove('active');
-  }
-  
-  function showIOSModal() {
-    document.getElementById('iosModal').classList.add('active');
-  }
-  
-  function closeIOSModal() {
-    document.getElementById('iosModal').classList.remove('active');
-  }
-
-  // الاستماع لحدث التثبيت (أندرويد/كروم)
-  window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    deferredPrompt = e;
+  try {
+    const [w, m] = await Promise.all([
+      fetch(`https://api.open-meteo.com/v1/forecast?latitude=${LAT}&longitude=${LON}&current=wind_speed_10m,wind_direction_10m,surface_pressure&timezone=Asia/Damascus`),
+      fetch(`https://marine-api.open-meteo.com/v1/marine?latitude=${LAT}&longitude=${LON}&current=wave_height&timezone=Asia/Damascus`)
+    ]);
     
-    // إظهار زر التثبيت الرئيسي
-    const installBtn = document.getElementById('installBtn');
-    installBtn.style.display = 'flex';    
-    // إظهار الشريط السفلي أيضاً
-    showInstallBanner();
+    if (!w.ok) throw new Error('فشل جلب البيانات');
+    const wd = await w.json();
+    const md = m.ok ? await m.json() : null;
     
-    console.log('📲 Install prompt available');
-  });
-
-  // بعد التثبيت
-  window.addEventListener('appinstalled', () => {
-    document.getElementById('installBtn').style.display = 'none';
-    hideInstallBanner();
-    deferredPrompt = null;
-    console.log('✅ PWA installed');
-  });
-
-  // زر التثبيت الرئيسي
-  document.getElementById('installBtn')?.addEventListener('click', async () => {
-    if (!deferredPrompt) return;
-    deferredPrompt.prompt();
-    const { outcome } = await deferredPrompt.userChoice;
-    if (outcome === 'accepted') {
-      document.getElementById('installBtn').style.display = 'none';
-      hideInstallBanner();
-    }
-    deferredPrompt = null;
-  });
-
-  // زر التثبيت في الشريط السفلي
-  document.getElementById('bannerInstallBtn')?.addEventListener('click', async () => {
-    if (deferredPrompt) {
-      deferredPrompt.prompt();
-      const { outcome } = await deferredPrompt.userChoice;
-      if (outcome === 'accepted') {
-        hideInstallBanner();
-        document.getElementById('installBtn').style.display = 'none';
-      }
-      deferredPrompt = null;
-    }
-  });
-
-  // كشف iOS وعرض التعليمات عند النقر على زر التثبيت
-  document.getElementById('installBtn')?.addEventListener('click', (e) => {
-    if (isIOS && !deferredPrompt) {
-      e.preventDefault();
-      showIOSModal();
-    }
-  });
-
-  // إغلاق النافذة عند النقر خارجها
-  document.getElementById('iosModal')?.addEventListener('click', (e) => {    if (e.target.id === 'iosModal') closeIOSModal();
-  });
-
-  // ========== التشغيل عند التحميل ==========
-  window.onload = () => {
-    updateOnlineStatus();
+    const wind = wd.current.wind_speed_10m;
+    const wDir = wd.current.wind_direction_10m;
+    const press = (wd.current.surface_pressure * 0.750062).toFixed(1);
+    const wave = md?.current?.wave_height || 0;
     
-    // تحميل البيانات المحفوظة
+    // حساب المؤشر
+    let score = 0;
+    if (wind >= 5 && wind <= 15) score += 35; else if (wind < 25) score += 25; else score += 10;
+    if (wave < 0.5) score += 35; else if (wave < 1) score += 25; else score += 10;
+    if (wd.current.surface_pressure > 1010 && wd.current.surface_pressure < 1018) score += 30; else score += 15;
+    
+    // تحديث الواجهة
+    document.getElementById('wind').textContent = Math.round(wind) + ' كم/س';
+    document.getElementById('dir').textContent = windDirs[Math.round(wDir/45) % 8];
+    document.getElementById('wave').textContent = wave.toFixed(2) + ' م';
+    document.getElementById('press').textContent = press + ' mmHg';
+    document.getElementById('fish').textContent = score + '%';
+    document.getElementById('fill').style.width = score + '%';
+    document.getElementById('fill').style.background = score > 70 ? '#22c55e' : score > 40 ? '#f59e0b' : '#ef4444';
+    document.getElementById('fishText').textContent = score > 70 ? '🟢 ممتاز' : score > 40 ? '🟡 مقبول' : '🔴 ضعيف';
+    
+    status.innerHTML = '✅ ' + new Date().toLocaleTimeString('ar-SY');
+    status.className = 'status success';
+    
+    localStorage.setItem('seaData', JSON.stringify({wind, wDir, wave, press, score, time: Date.now()}));
+    
+  } catch (err) {
+    console.error(err);
+    status.innerHTML = '❌ ' + err.message;
+    status.className = 'status error';
+    
+    // عرض البيانات المحفوظة
     const saved = localStorage.getItem('seaData');
     if (saved) {
       const d = JSON.parse(saved);
-      document.getElementById('wind').textContent = `${Math.round(d.wind)} كم/س`;
-      document.getElementById('dir').textContent = windDirs[Math.round(d.wDir/45)%8];
-      document.getElementById('wave').textContent = `${d.wave.toFixed(2)} م`;
-      document.getElementById('press').textContent = `${d.pressMmhg} mmHg`;
-      document.getElementById('fish').textContent = `${d.score}%`;
-      document.getElementById('fill').style.width = `${d.score}%`;
-      document.getElementById('fill').style.background = d.score > 70 ? '#22c55e' : d.score > 40 ? '#f59e0b' : '#ef4444';
+      document.getElementById('wind').textContent = Math.round(d.wind) + ' كم/س';
+      document.getElementById('dir').textContent = windDirs[Math.round(d.wDir/45) % 8];      document.getElementById('wave').textContent = d.wave.toFixed(2) + ' م';
+      document.getElementById('press').textContent = d.press + ' mmHg';
+      document.getElementById('fish').textContent = d.score + '%';
+      document.getElementById('fill').style.width = d.score + '%';
     }
-    
-    // جلب البيانات الجديدة
-    fetchData();
-    setInterval(fetchData, 30 * 60 * 1000);
-    
-    // عرض تعليمات التثبيت لـ iOS بعد 3 ثوانٍ إذا لم يكن مثبتاً
-    if (isIOS && window.matchMedia('(display-mode: browser)').matches) {
-      setTimeout(() => {
-        const installed = localStorage.getItem('pwaInstalled');
-        if (!installed) showIOSModal();
-      }, 3000);
-    }
-  };
-
-  // علامة أن التطبيق تم تثبيته
-  if (window.matchMedia('(display-mode: standalone)').matches) {
-    localStorage.setItem('pwaInstalled', 'true');
   }
+}
 
-})();
+// ========== الإشعارات ==========
+function requestNotif() {
+  if (!('Notification' in window)) { alert('لا يدعم متصفحك الإشعارات'); return; }
+  Notification.requestPermission().then(p => {
+    if (p === 'granted') {
+      new Notification('🌊 رأس البسيط', { body: 'تم تفعيل التنبيهات', icon: '🌊' });
+      alert('✅ تم التفعيل');
+    } else alert('❌ تم الرفض');
+  });
+}
+
+// ========== التثبيت ==========
+function showBar() { document.getElementById('installBar').classList.add('show'); }
+function hideBar() { document.getElementById('installBar').classList.remove('show'); }
+function showModal() { document.getElementById('iosModal').classList.add('show'); }
+function closeModal() { document.getElementById('iosModal').classList.remove('show'); }
+
+// عند توفر حدث التثبيت (أندرويد/كروم سطح المكتب)
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault();
+  deferredPrompt = e;
+  document.getElementById('installBtn').style.display = 'flex';
+  showBar();
+  console.log('📲 Install available');
+});
+
+// بعد التثبيت
+window.addEventListener('appinstalled', () => {
+  document.getElementById('installBtn').style.display = 'none';
+  hideBar();
+  deferredPrompt = null;
+  localStorage.setItem('installed', 'true');
+  console.log('✅ Installed');
+});
+
+// زر التثبيت الرئيسي
+document.getElementById('installBtn').onclick = async () => {
+  if (isIOS) { showModal(); return; }
+  if (!deferredPrompt) return;
+  deferredPrompt.prompt();
+  const { outcome } = await deferredPrompt.userChoice;
+  if (outcome === 'accepted') {    document.getElementById('installBtn').style.display = 'none';
+    hideBar();
+  }
+  deferredPrompt = null;
+};
+
+// زر الشريط السفلي
+document.getElementById('barInstall').onclick = async () => {
+  if (isIOS) { showModal(); return; }
+  if (!deferredPrompt) return;
+  deferredPrompt.prompt();
+  const { outcome } = await deferredPrompt.userChoice;
+  if (outcome === 'accepted') {
+    hideBar();
+    document.getElementById('installBtn').style.display = 'none';
+  }
+  deferredPrompt = null;
+};
+
+// إغلاق النوافذ
+document.getElementById('iosModal').onclick = e => { if (e.target.id === 'iosModal') closeModal(); };
+
+// ========== عند التحميل ==========
+window.onload = () => {
+  updateOnline();
+  
+  // تحميل البيانات المحفوظة
+  const saved = localStorage.getItem('seaData');
+  if (saved) {
+    const d = JSON.parse(saved);
+    document.getElementById('wind').textContent = Math.round(d.wind) + ' كم/س';
+    document.getElementById('dir').textContent = windDirs[Math.round(d.wDir/45) % 8];
+    document.getElementById('wave').textContent = d.wave.toFixed(2) + ' م';
+    document.getElementById('press').textContent = d.press + ' mmHg';
+    document.getElementById('fish').textContent = d.score + '%';
+    document.getElementById('fill').style.width = d.score + '%';
+    document.getElementById('fill').style.background = d.score > 70 ? '#22c55e' : d.score > 40 ? '#f59e0b' : '#ef4444';
+  }
+  
+  fetchData();
+  setInterval(fetchData, 30 * 60 * 1000);
+  
+  // عرض تعليمات آيفون تلقائياً إذا لم يُثبّت
+  if (isIOS && !localStorage.getItem('installed')) {
+    setTimeout(() => {
+      if (window.matchMedia('(display-mode: browser)').matches) showModal();
+    }, 4000);
+  }
+};
+// كشف وضع التثبيت
+if (window.matchMedia('(display-mode: standalone)').matches) {
+  localStorage.setItem('installed', 'true');
+}
 </script>
 </body>
 </html>
